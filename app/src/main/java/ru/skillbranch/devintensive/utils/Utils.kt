@@ -1,4 +1,4 @@
-package org.devintensive.utils
+package ru.skillbranch.devintensive.utils
 
 object Utils {
 

@@ -1,4 +1,4 @@
-package org.devintensive.models
+package ru.skillbranch.devintensive.models
 
 import java.util.*
 
@@ -22,8 +22,20 @@ abstract class BaseMessage(
         ): BaseMessage {
             lastId++
             return when (type) {
-                "image" -> ImageMessage("$lastId", from, chat, date = date, image = payload as String)
-                else -> TextMessage("$lastId", from, chat, date = date, text = payload as String)
+                "image" -> ImageMessage(
+                    "$lastId",
+                    from,
+                    chat,
+                    date = date,
+                    image = payload as String
+                )
+                else -> TextMessage(
+                    "$lastId",
+                    from,
+                    chat,
+                    date = date,
+                    text = payload as String
+                )
             }
 
         }

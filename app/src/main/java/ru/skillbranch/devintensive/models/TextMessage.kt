@@ -1,6 +1,6 @@
-package org.devintensive.models
+package ru.skillbranch.devintensive.models
 
-import org.devintensive.utils.humanizeDiff
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import java.util.*
 
 class TextMessage(

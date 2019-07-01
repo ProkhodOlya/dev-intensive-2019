@@ -1,6 +1,6 @@
-package org.devintensive.models
+package ru.skillbranch.devintensive.models
 
-import org.devintensive.utils.Utils
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 data class User(
@@ -31,7 +31,7 @@ data class User(
         fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
         fun build() = User(
-            id = User.getLastId().toString(),
+            id = getLastId().toString(),
             firstName = firstName,
             lastName = lastName,
             avatar = avatar,
@@ -48,7 +48,12 @@ data class User(
         fun makeUser(fullName: String?): User {
             lastId++
             val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User(id = "$lastId", firstName = firstName, lastName = lastName, avatar = null)
+            return User(
+                id = "$lastId",
+                firstName = firstName,
+                lastName = lastName,
+                avatar = null
+            )
         }
     }
 }
