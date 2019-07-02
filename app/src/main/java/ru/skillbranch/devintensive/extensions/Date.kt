@@ -12,7 +12,7 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String = SimpleDateForma
 
 fun Date.add(value: Long, timeUnits: TimeUnits): Date {
     val time = this.time
-    time.plus(
+    this.time = time.plus(
         when (timeUnits) {
             TimeUnits.SECOND -> value * SECOND
             TimeUnits.MINUTE -> value * MINUTE
@@ -20,11 +20,11 @@ fun Date.add(value: Long, timeUnits: TimeUnits): Date {
             TimeUnits.DAY -> value * DAY
         }
     )
-    this.time = time
     return this
 }
 
 fun Date.humanizeDiff(): String {
+    val minutePlural = listOf("минут", "минуту", "минуты", "минуты", "минуты", "минут", "минут", "минут", "минут", "минут", "минут")
     val time = this.time
     val days = time / DAY
     val hours = time / HOUR
@@ -38,13 +38,12 @@ fun Date.humanizeDiff(): String {
     val currentSeconds = currentTime / SECOND
 
     return when {
-        currentTime - time in 0..1 -> "только что"
-        currentSeconds - seconds in 1..45 -> "несколько секунд назад"
+        currentSeconds - seconds in 0..1 -> "только что"
         currentSeconds - seconds in 1..45 -> "несколько секунд назад"
         currentSeconds - seconds in 45..75 -> "минуту назад"
-        currentSeconds - seconds >= 75 && currentMinutes - minutes <= 45 -> "${currentMinutes - minutes} минут назад"
+        currentSeconds - seconds >= 75 && currentMinutes - minutes <= 45 -> "${currentMinutes - minutes} минуту назад"
         currentMinutes - minutes in 45..75 -> "час назад"
-        currentMinutes - minutes >= 75 && currentHours - hours <= 22 -> "${currentHours - hours} часов назад"
+        currentMinutes - minutes >= 75 && currentHours - hours <= 22 -> "${currentHours - hours} часа назад"
         currentHours - hours in 22..26 -> "день назад"
         currentHours - hours >= 26 && currentDays - days <= 360 -> "${currentDays - days} дней назад"
         currentDays - days > 360 -> "более года назад"
